@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Valeria</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background-color: #fce4ec;
+      color: #333;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .centered {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 28px;
+      text-align: center;
+      color: #d81b60;
+      animation: fadeInOut 4s forwards;
+      z-index: 20;
+    }
+
+    @keyframes fadeInOut {
+      0% {opacity: 0;}
+      15% {opacity: 1;}
+      85% {opacity: 1;}
+      100% {opacity: 0;}
+    }
+
+    video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+      display: none;
+      z-index: 10;
+    }
+
+    .message-between {
+      display: none;
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      background: rgba(255, 192, 203, 0.85);
+      padding: 16px 24px;
+      border-radius: 16px;
+      color: #880e4f;
+      cursor: pointer;
+      text-align: center;
+      animation: fadeIn 2s ease-in;
+      z-index: 15;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    .final-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #fce4ec;
+      z-index: 15;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch; /* Для плавной прокрутки на iOS */
+    }
+
+    .final-text {
+      padding: 30px;
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: rgba(252, 228, 236, 0.9);
+      font-size: 20px;
+      line-height: 1.6;
+      white-space: pre-line;
+      color: #6a1b9a;
+      animation: typewriter 7s steps(100) 1 forwards;
+      border-radius: 16px;
+      margin-top: 20px;
+      margin-bottom: 40px;
+    }
+
+    @keyframes typewriter {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .play-button {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 192, 203, 0.85);
+      color: #880e4f;
+      border: none;
+      padding: 15px 30px;
+      font-size: 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      z-index: 15;
+    }
+
+    /* Стили для мобильных устройств */
+    @media (max-width: 768px) {
+      .final-text {
+        font-size: 18px;
+        padding: 20px;
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Intro Title -->
+  <div class="centered" id="intro">For Valeria<br>From Ruslan</div>
+
+  <div class="video-container">
+    <!-- Video 1 -->
+    <video id="video1" playsinline controlslist="nodownload noplaybackrate nofullscreen" onended="showMidText()">
+      <source src="https://raw.githubusercontent.com/forvaleriya/MUSIC/main/IMG_1246%20(1).MOV" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <!-- Play Button (fallback) -->
+    <button class="play-button" id="playButton1" onclick="startFirstVideo()">▶️ Нажмите для просмотра</button>
+
+    <!-- Middle message -->
+    <div class="message-between" id="midText" onclick="playSecondVideo()">
+      Спасибо тебе 💖<br>С днём рождения!
+    </div>
+
+    <!-- Video 2 -->
+    <video id="video2" playsinline controlslist="nodownload noplaybackrate nofullscreen" onended="showFinalMessage()">
+      <source src="https://raw.githubusercontent.com/forvaleriya/valeriya/main/IMG_1247%20(1).MOV" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <!-- Play Button (fallback) -->
+    <button class="play-button" id="playButton2" onclick="startSecondVideo()">▶️ Нажмите для просмотра</button>
+  </div>
+
+  <!-- Final Message Container -->
+  <div class="final-container" id="finalContainer">
+    <div class="final-text" id="finalMessage">
+Лера, поздравляю тебя с днём рождения! 🎉
+
+Вот уже тебе 16 лет — ты становишься совсем взрослой.
+Хотел бы пожелать тебе всего самого наилучшего: настоящего счастья, внутреннего тепла, уверенности в себе, и чтобы всё, о чём ты мечтаешь, обязательно сбылось.
+
+Пусть в твоей жизни будет много моментов, от которых захватывает дух. Желаю тебе любви, лёгкости, настоящих друзей и вдохновения каждый день.
+
+И знай: я тебя очень люблю ❤️
+Что бы ни происходило — даже если тебе грустно или тяжело — я всегда рядом.
+
+Спасибо тебе за то, что ты есть.
+Ты удивительная.
+
+С любовью,  
+Руслан 💌
+    </div>
+  </div>
+
+  <script>
+    // Показываем первое видео после заставки
+    setTimeout(() => {
+      document.getElementById('intro').style.display = 'none';
+      const v1 = document.getElementById('video1');
+      v1.style.display = 'block';
+      
+      // Пытаемся воспроизвести со звуком
+      const playPromise = v1.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          // Если авто-воспроизведение заблокировано, показываем кнопку
+          document.getElementById('playButton1').style.display = 'block';
+        });
+      }
+    }, 4000);
+
+    function startFirstVideo() {
+      const v1 = document.getElementById('video1');
+      document.getElementById('playButton1').style.display = 'none';
+      v1.play();
+    }
+
+    function showMidText() {
+      document.getElementById('video1').style.display = 'none';
+      document.getElementById('playButton1').style.display = 'none';
+      const text = document.getElementById('midText');
+      text.style.display = 'block';
+    }
+
+    function playSecondVideo() {
+      document.getElementById('midText').style.display = 'none';
+      const v2 = document.getElementById('video2');
+      v2.style.display = 'block';
+      
+      const playPromise = v2.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          // Если второе видео не воспроизводится, показываем кнопку
+          document.getElementById('playButton2').style.display = 'block';
+        });
+      }
+    }
+
+    function startSecondVideo() {
+      const v2 = document.getElementById('video2');
+      document.getElementById('playButton2').style.display = 'none';
+      v2.play();
+    }
+
+    function showFinalMessage() {
+      document.getElementById('video2').style.display = 'none';
+      document.getElementById('playButton2').style.display = 'none';
+      document.getElementById('finalContainer').style.display = 'block';
+      
+      // Прокручиваем немного вниз, чтобы было видно начало текста
+      setTimeout(() => {
+        document.getElementById('finalContainer').scrollTo(0, 0);
+      }, 100);
+    }
+
+    // Обработчики ошибок загрузки видео
+    document.getElementById('video1').addEventListener('error', function() {
+      console.error('Ошибка загрузки видео 1');
+      document.getElementById('playButton1').style.display = 'none';
+      showMidText();
+    });
+
+    document.getElementById('video2').addEventListener('error', function() {
+      console.error('Ошибка загрузки видео 2');
+      document.getElementById('playButton2').style.display = 'none';
+      showFinalMessage();
+    });
+  </script>
+</body>
+</html>
